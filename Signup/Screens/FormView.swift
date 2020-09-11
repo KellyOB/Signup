@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FormScreen: View {
+struct FormView: View {
     
     @State private var profile = Profile()
     

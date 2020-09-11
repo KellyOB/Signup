@@ -19,21 +19,18 @@ struct SignupTextField: TextFieldStyle {
 struct SignupScreen: View {
     
     @State private var profile = Profile()
-    @State var selectedUser = "parent"
+    @State var selectedAvatar = ""
+    
+    let avatars = Avatar.loadAvatars()
     
 //    enum UserType {
 //        case parent, child, teacher
 //    }
     
-    var selectedUserType = String() {
+    var userSelectedAvatar = String() {
         didSet {
-           selectedUserType = selectedUser
-            
+           userSelectedAvatar = selectedAvatar
         }
-    }
-    
-    func loadParentStyles() {
-        //
     }
     
     var body: some View {
@@ -53,65 +50,9 @@ struct SignupScreen: View {
                     .padding(.top, 35.0)
                     .padding(.bottom, 5.0)
                 
-                AvatarList(selectedUser: $selectedUser)
-                FormScreen()
-//                VStack(spacing: 25.0) {
-//                    // USERNAME
-//                    HStack {
-//                        Image(systemName: "person")
-//                            .padding()
-//                            .foregroundColor(.secondary)
-//                        
-//                        TextField("Username",
-//                                  text: $profile.username)
-//                    }                      .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
-//                        .overlay(RoundedRectangle   (cornerRadius: 30, style: .continuous)
-//                            .stroke(Color.white, lineWidth: 1))
-//                        
-//                        .frame(maxWidth: .infinity)
-//                    
-//                    // EMAIL
-//                    HStack {
-//                        Image(systemName: "envelope")
-//                            .padding()
-//                            .foregroundColor(.secondary)
-//                        
-//                        TextField("Email",
-//                                  text: $profile.email)
-//                    }
-//                    .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
-//                    .overlay(RoundedRectangle   (cornerRadius: 30)
-//                    .stroke(Color.white, lineWidth: 1))
-//                    
-//                    // PASSWORD
-//                    HStack {
-//                        Image(systemName: "lock")
-//                            .padding()
-//                            .foregroundColor(.secondary)
-//                        TextField("Password",
-//                                  text: $profile.password)
-//                    }
-//                    .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
-//                    .overlay(RoundedRectangle   (cornerRadius: 30)
-//                    .stroke(Color.white, lineWidth: 1))
-//                    
-//                    // CONFIRM PASSWORD
-//                    HStack {
-//                        Image(systemName: "lock")
-//                            .padding()
-//                            .foregroundColor(.secondary)
-//                        TextField("Confirm Password",
-//                                  text: $profile.confirmPassword)
-//                    }
-//                    .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
-//                    .overlay(RoundedRectangle   (cornerRadius: 30)
-//                    .stroke(Color.white, lineWidth: 1))
-//                    
-//                }
-//                .frame(maxWidth: .infinity)
-//                .padding(.top, 15.0)
-//                .padding(.horizontal, 40)
-//                .textFieldStyle(SignupTextField())
+                AvatarView(selectedAvatar: $selectedAvatar, avatars: avatars)
+                
+                FormView()
                 
                 Button(action: {
                     // add action
@@ -124,7 +65,7 @@ struct SignupScreen: View {
                 .padding(.all, 6.0)
                 .frame(height: 50)
                 .frame(maxWidth: .infinity)
-                .background(LinearGradient(gradient: Gradient(colors: [Color(red: 238/255, green: 76/255, blue: 92/255), Color(red: 240/255, green: 125/255, blue: 56/255)]), startPoint: .leading, endPoint: .trailing))
+                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
                 .cornerRadius(30)
                 .padding(.top, 45.0)
                 .padding(.horizontal, 40)
@@ -140,28 +81,28 @@ struct SignupScreen: View {
                 .font(.custom("Avenir", size: 15))
                 .padding(.top, 30)
             }
-        }.background(Color(red: 0.161, green: 0.184, blue: 0.278).edgesIgnoringSafeArea(.all))
-        
-        // PARENT
-        //.background(Color(red: 0.996, green: 0.878, blue: 0.635).edgesIgnoringSafeArea(.all))
-        
-        // CHILD
-        //.background(Color(red: 0.937, green: 0.6, blue: 0.212).edgesIgnoringSafeArea(.all))
-        
-        // TEACHER
-        //.background(Color(red: 0.753, green: 0.898, blue: 0.894).edgesIgnoringSafeArea(.all))
-        
-        
+        }.background(setBGColor(selectedAvatar: selectedAvatar).edgesIgnoringSafeArea(.all))
     }
     
-    func changeUsercolors(user: UserType) -> Color {
-        switch user {
-        case .parent:
-            return Color(red: 0.161, green: 0.184, blue: 0.278).edgesIgnoringSafeArea(.all) as! Color
-        default:
-            return Color(red: 0.461, green: 0.584, blue: 0.478).edgesIgnoringSafeArea(.all) as! Color
+    func setBGColor(selectedAvatar: String) -> Color {
+        if selectedAvatar == "TEACHER" {
+            return Color(UIColor.SCREEN_BG.teacher)
+        } else if selectedAvatar == "CHILD" {
+            return Color(UIColor.SCREEN_BG.child)
+        } else if selectedAvatar == "PARENT" {
+            return Color(UIColor.SCREEN_BG.parent)
         }
+        return Color(UIColor.SCREEN_BG.start)
     }
+    
+//    func changeUsercolors(user: Avatar) -> Color {
+//        switch user {
+//        case .parent:
+//            return Color(red: 0.161, green: 0.184, blue: 0.278).edgesIgnoringSafeArea(.all) as! Color
+//        default:
+//            return Color(red: 0.461, green: 0.584, blue: 0.478).edgesIgnoringSafeArea(.all) as! Color
+//        }
+//    }
 }
 
 struct SignupScreen_Previews: PreviewProvider {
@@ -169,59 +110,3 @@ struct SignupScreen_Previews: PreviewProvider {
         SignupScreen()
     }
 }
-
-
-//.padding(10.0)
-//.background(Color(red: 0.161, green: 0.184, blue: 0.278))
-//.cornerRadius(30)
-// .foregroundColor(.black)//text color when you type
-//.accentColor(.blue)//cursor color
-//.overlay(RoundedRectangle(cornerRadius: 30).stroke((Color(red: 85/255, green: 91/255, blue: 115/255)), lineWidth: 2))
-
-// Blue color
-//.foregroundColor(Color(red: 41.0, green: 47.0, blue: 71.0, opacity: 1.0))
-
-
-
-//.background(SwiftUI.Color.yellow.edgesIgnoringSafeArea(.all))
-// Form {
-//                HStack {
-//                Image(systemName: "person").foregroundColor(.gray)
-//                    TextField("Enter your firstName", text: $profile.firstName)
-////                    onEditingChanged: { _ in print("changed") },
-////                    onCommit: { print("commit") }
-//                Image(systemName:"exclamationmark.triangle.fill").foregroundColor(Color.red)
-//
-//                }
-//                ZStack {
-//                Image(systemName: "person").foregroundColor(.gray)
-//                    .offset(x: -165, y: 0)
-//                TextField("     Username", text: $profile.username)
-//                    //.padding(.leading, 30)
-////                Image(systemName:"exclamationmark.triangle.fill").foregroundColor(Color.red)
-//                }
-
-
-//                TextField("Username", text: $profile.username)
-//                    .background(SwiftUI.Color.red)
-//                    // changes input text color
-//                    //.foregroundColor(.red)
-//                    .background(RoundedRectangle(cornerRadius: 30))
-//.overlay(RoundedRectangle(cornerRadius: 30).stroke(Color.blue, lineWidth: 3))
-//.textFieldStyle(RoundedBorderTextFieldStyle())
-
-//                TextField("Email", text: $profile.email)
-//                    .textContentType(.emailAddress)
-//                .padding(.all)
-//                //.background(textFieldBackground)
-//
-//
-//                TextField("Password", text: $profile.password)
-//
-//                TextField("Confirm Password", text: $profile.confirmPassword)
-// }//.background(Color.black)
-
-//            .onAppear {
-//               UITableView.appearance().backgroundColor = UIColor(red:41/255, green:47/255, blue:71/255, alpha:1.0)
-//            }
-//.textFieldStyle(SignupTextField())

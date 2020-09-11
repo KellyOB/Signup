@@ -14,9 +14,12 @@
 		BE5F2846250871AB0059099A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE5F2845250871AB0059099A /* Preview Assets.xcassets */; };
 		BE5F2849250871AB0059099A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE5F2847250871AB0059099A /* LaunchScreen.storyboard */; };
 		BE5F2851250872250059099A /* SignupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F2850250872250059099A /* SignupScreen.swift */; };
-		BE6DA4632509E00A00617654 /* AvatarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4622509E00A00617654 /* AvatarList.swift */; };
-		BE6DA4652509E48B00617654 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4642509E48A00617654 /* UserType.swift */; };
-		BE6DA4672509ED5700617654 /* FormScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4662509ED5700617654 /* FormScreen.swift */; };
+		BE6DA4632509E00A00617654 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4622509E00A00617654 /* AvatarView.swift */; };
+		BE6DA4652509E48B00617654 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4642509E48A00617654 /* Avatar.swift */; };
+		BE6DA4672509ED5700617654 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4662509ED5700617654 /* FormView.swift */; };
+		BE96448C250B4AFF0016D98F /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE96448B250B4AFF0016D98F /* AvatarCell.swift */; };
+		BE96448E250BE4DC0016D98F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE96448D250BE4DC0016D98F /* Constants.swift */; };
+		BE964490250BF7B40016D98F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE96448F250BF7B40016D98F /* ButtonView.swift */; };
 		BEF88EDF2508777B007C34C4 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF88EDE2508777B007C34C4 /* Profile.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,9 +33,12 @@
 		BE5F2848250871AB0059099A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE5F284A250871AC0059099A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE5F2850250872250059099A /* SignupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupScreen.swift; sourceTree = "<group>"; };
-		BE6DA4622509E00A00617654 /* AvatarList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarList.swift; sourceTree = "<group>"; };
-		BE6DA4642509E48A00617654 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
-		BE6DA4662509ED5700617654 /* FormScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen.swift; sourceTree = "<group>"; };
+		BE6DA4622509E00A00617654 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		BE6DA4642509E48A00617654 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		BE6DA4662509ED5700617654 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
+		BE96448B250B4AFF0016D98F /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
+		BE96448D250BE4DC0016D98F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BE96448F250BF7B40016D98F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		BEF88EDE2508777B007C34C4 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +72,7 @@
 		BE5F283B250871A80059099A /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				BE96448D250BE4DC0016D98F /* Constants.swift */,
 				BEF88EE025087798007C34C4 /* Model */,
 				BE5F28522508724D0059099A /* Screens */,
 				BE5F283C250871A80059099A /* AppDelegate.swift */,
@@ -91,8 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				BE5F2850250872250059099A /* SignupScreen.swift */,
-				BE6DA4622509E00A00617654 /* AvatarList.swift */,
-				BE6DA4662509ED5700617654 /* FormScreen.swift */,
+				BE6DA4622509E00A00617654 /* AvatarView.swift */,
+				BE96448B250B4AFF0016D98F /* AvatarCell.swift */,
+				BE6DA4662509ED5700617654 /* FormView.swift */,
+				BE96448F250BF7B40016D98F /* ButtonView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -101,7 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				BEF88EDE2508777B007C34C4 /* Profile.swift */,
-				BE6DA4642509E48A00617654 /* UserType.swift */,
+				BE6DA4642509E48A00617654 /* Avatar.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,13 +187,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE5F283D250871A80059099A /* AppDelegate.swift in Sources */,
+				BE96448C250B4AFF0016D98F /* AvatarCell.swift in Sources */,
 				BEF88EDF2508777B007C34C4 /* Profile.swift in Sources */,
-				BE6DA4652509E48B00617654 /* UserType.swift in Sources */,
+				BE6DA4652509E48B00617654 /* Avatar.swift in Sources */,
 				BE5F283F250871A80059099A /* SceneDelegate.swift in Sources */,
+				BE96448E250BE4DC0016D98F /* Constants.swift in Sources */,
+				BE964490250BF7B40016D98F /* ButtonView.swift in Sources */,
 				BE5F2841250871A80059099A /* ContentView.swift in Sources */,
-				BE6DA4632509E00A00617654 /* AvatarList.swift in Sources */,
+				BE6DA4632509E00A00617654 /* AvatarView.swift in Sources */,
 				BE5F2851250872250059099A /* SignupScreen.swift in Sources */,
-				BE6DA4672509ED5700617654 /* FormScreen.swift in Sources */,
+				BE6DA4672509ED5700617654 /* FormView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
