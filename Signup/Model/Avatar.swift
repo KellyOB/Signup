@@ -18,20 +18,20 @@ struct Avatar: Identifiable {
     
     static func loadAvatars() -> [Avatar] {
         return [
-            Avatar(id: 1, image: "parent", type: "PARENT"),
-            Avatar(id: 2, image: "child", type: "CHILD"),
-            Avatar(id: 3, image: "teacher", type: "TEACHER")
+            Avatar(id: 1, image: "parent", type: "parent"),
+            Avatar(id: 2, image: "child", type: "child"),
+            Avatar(id: 3, image: "teacher", type: "teacher")
         ]
     }
 }
 
 
 
-//enum UserType: String {
+//enum AvatarState: String {
 //    case parent = "parent"
 //    case child = "child"
 //    case teacher = "teacher"
-//
+
 //    var user: String {
 //        switch self {
 //        case .parent:

@@ -14,62 +14,95 @@ struct FormView: View {
     
     var body: some View {
         VStack(spacing: 25.0) {
+            
             // USERNAME
             HStack {
                 Image(systemName: "person")
                     .padding()
-                    .foregroundColor(.secondary)
+                .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
                 
-                TextField("Username",
-                          text: $profile.username)
-            }                      .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
-                .overlay(RoundedRectangle   (cornerRadius: 30, style: .continuous)
-                    .stroke(Color.white, lineWidth: 1))
-                
-                .frame(maxWidth: .infinity)
+                CustomTextField(placeholder: Text("Username").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.username)
+            }
+            .background(Capsule().fill(Color(UIColor.FORM_COLOR.start)))
+            .overlay(RoundedRectangle(cornerRadius: 30, style: .continuous)
+                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1))
+            //.frame(maxWidth: .infinity)
             
             // EMAIL
             HStack {
                 Image(systemName: "envelope")
                     .padding()
-                    .foregroundColor(.secondary)
+                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
                 
-                TextField("Email",
-                          text: $profile.email)
+                CustomTextField(placeholder: Text("Email").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.email)
             }
-            .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
-            .overlay(RoundedRectangle   (cornerRadius: 30)
-            .stroke(Color.white, lineWidth: 1))
+            .background(Capsule().fill(Color(red: 0.161, green: 0.184, blue: 0.278)))
+            .overlay(RoundedRectangle(cornerRadius: 30)
+                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1))
             
             // PASSWORD
             HStack {
                 Image(systemName: "lock")
                     .padding()
-                    .foregroundColor(.secondary)
-                TextField("Password",
-                          text: $profile.password)
+                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
+                
+               CustomSecureField(placeholder: Text("Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.password)
             }
-            .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
+            .background(Capsule().fill(Color(red: 0.161, green: 0.184, blue: 0.278)))
             .overlay(RoundedRectangle   (cornerRadius: 30)
-            .stroke(Color.white, lineWidth: 1))
+                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1))
             
             // CONFIRM PASSWORD
             HStack {
                 Image(systemName: "lock")
                     .padding()
-                    .foregroundColor(.secondary)
-                TextField("Confirm Password",
-                          text: $profile.confirmPassword)
+                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
+                
+                CustomSecureField(placeholder: Text("Confirm Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.confirmPassword)
             }
-            .background(Capsule().fill(Color(red: 117/255, green: 0.58, blue: 0.776)))
+            .background(Capsule().fill(Color(red: 0.161, green: 0.184, blue: 0.278)))
             .overlay(RoundedRectangle   (cornerRadius: 30)
-            .stroke(Color.white, lineWidth: 1))
-            
+                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1))
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 15.0)
         .padding(.horizontal, 40)
         .textFieldStyle(SignupTextField())
+    }
+}
+
+struct CustomTextField: View {
+    var placeholder: Text
+    @Binding var text: String
+    var editingChanged: (Bool)->() = { _ in }
+    var commit: ()->() = { }
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            if text.isEmpty { placeholder }
+            TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+        }
+    }
+}
+
+struct CustomSecureField: View {
+    var placeholder: Text
+    @Binding var text: String
+    var editingChanged: (Bool)->() = { _ in }
+    var commit: ()->() = { }
+
+    var body: some View {
+        ZStack(alignment: .leading) {
+            if text.isEmpty { placeholder }
+           SecureField("", text: $text)
+        }
+    }
+}
+
+extension TextField {
+    func textFieldModifier() -> some View {
+        self
+         .foregroundColor(.white)
     }
 }
 

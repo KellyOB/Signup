@@ -19,7 +19,7 @@ struct SignupTextField: TextFieldStyle {
 struct SignupScreen: View {
     
     @State private var profile = Profile()
-    @State var selectedAvatar = ""
+    @State var selectedAvatar = "none"
     
     let avatars = Avatar.loadAvatars()
     
@@ -29,7 +29,7 @@ struct SignupScreen: View {
     
     var userSelectedAvatar = String() {
         didSet {
-           userSelectedAvatar = selectedAvatar
+            userSelectedAvatar = selectedAvatar
         }
     }
     
@@ -46,29 +46,15 @@ struct SignupScreen: View {
                 Text("WHO YOU ARE?")
                     .fontWeight(.black)
                     .font(.custom("Avenir", size: 15))
-                    .foregroundColor(Color(red: 0.533, green: 0.58, blue: 0.776))
+                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
                     .padding(.top, 35.0)
                     .padding(.bottom, 5.0)
                 
-                AvatarView(selectedAvatar: $selectedAvatar, avatars: avatars)
+                AvatarView(selectedAvatar: $selectedAvatar)
                 
                 FormView()
                 
-                Button(action: {
-                    // add action
-                }) {
-                    Text("SIGNUP")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                }
-                .padding(.all, 6.0)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(30)
-                .padding(.top, 45.0)
-                .padding(.horizontal, 40)
+                ButtonView()
                 
                 HStack {
                     Text("Already have an account.")
@@ -85,11 +71,13 @@ struct SignupScreen: View {
     }
     
     func setBGColor(selectedAvatar: String) -> Color {
-        if selectedAvatar == "TEACHER" {
-            return Color(UIColor.SCREEN_BG.teacher)
-        } else if selectedAvatar == "CHILD" {
+        if selectedAvatar == "teacher" {
+            return Color.red
+            //return Color(UIColor.SCREEN_BG.teacher)
+        } else if selectedAvatar == "child" {
             return Color(UIColor.SCREEN_BG.child)
-        } else if selectedAvatar == "PARENT" {
+        } else if selectedAvatar == "parent" {
+            //return Color.green
             return Color(UIColor.SCREEN_BG.parent)
         }
         return Color(UIColor.SCREEN_BG.start)

@@ -10,12 +10,26 @@ import SwiftUI
 
 struct ButtonView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: {
+            // add action
+        }) {
+            Text("SIGNUP")
+                .font(.headline)
+                .foregroundColor(.white)
+                .fontWeight(.bold)
+        }
+        .padding(.all, 6.0)
+        .frame(height: 50)
+        .frame(maxWidth: .infinity)
+        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
+        .cornerRadius(30)
+        .padding(.top, 45.0)
+        .padding(.horizontal, 40)
     }
 }
 
-struct ButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        ButtonView()
-    }
-}
+//struct ButtonView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ButtonView()
+//    }
+//}

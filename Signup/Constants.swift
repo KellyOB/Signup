@@ -12,7 +12,17 @@ extension UIColor {
     
     struct SCREEN_BG {
         static let start = UIColor(red: 0.161, green: 0.184, blue: 0.278, alpha: 1)
-        static let parent = UIColor(red: 0.996, green: 0.878, blue: 0.635, alpha: 1)
+        static let parent = UIColor(red: 174/255, green: 192/255, blue: 134/255, alpha: 1)
+        //static let parent = UIColor(red: 0.996, green: 0.878, blue: 0.635, alpha: 1)
+        static let child = UIColor(red: 0.937, green: 0.6, blue: 0.212, alpha: 1)
+        static let teacher = UIColor(red: 0.753, green: 0.898, blue: 0.894, alpha: 1)
+    }
+    
+    struct FORM_COLOR {
+        static let start = UIColor(red: 0.161, green: 0.184, blue: 0.278, alpha: 1)
+        static let formOutline = UIColor(red: 130/255, green: 137/255, blue: 184/255, alpha: 1)
+        static let parent = UIColor(red: 174/255, green: 192/255, blue: 134/255, alpha: 1)
+        //static let parent = UIColor(red: 0.996, green: 0.878, blue: 0.635, alpha: 1)
         static let child = UIColor(red: 0.937, green: 0.6, blue: 0.212, alpha: 1)
         static let teacher = UIColor(red: 0.753, green: 0.898, blue: 0.894, alpha: 1)
     }
@@ -22,7 +32,7 @@ extension UIColor {
         static let endColor = UIColor(red: 240/255, green: 125/255, blue: 56/255, alpha: 1)
     }
     
-    struct AVATAR_TEXT_COLOR {
+    struct AVATAR_TEXT_COLOR { 
         static let start = UIColor(red: 0.161, green: 0.184, blue: 0.278, alpha: 1)
         static let parent = UIColor(red: 0.996, green: 0.878, blue: 0.635, alpha: 1)
         static let child = UIColor(red: 0.937, green: 0.6, blue: 0.212, alpha: 1)

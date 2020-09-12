@@ -23,17 +23,18 @@ struct AvatarCell: View {
                     //.stroke(Color.white, lineWidth: 2) : RoundedRectangle(cornerRadius: 50)
                     //.stroke(Color.white, lineWidth: 0))
             
-                .opacity(avatar.type == self.selectedAvatar ? 1.0 : 0.5)
+               // .opacity(avatar.type == self.selectedAvatar ? 1.0 : 0.5)
+                .opacity(setAvatarOpacity(selectedAvatar: selectedAvatar))
                 //.opacity(setAvatarTextColor(selectedAvatar: selectedAvatar))
-               // .overlay(setAvatarHighlight(selectedAvatar: selectedAvatar))
+               .overlay(setAvatarHighlight(selectedAvatar: selectedAvatar))
             
             Text(avatar.type)
                 .fontWeight(.bold)
                 .font(.custom("Avenir", size: 13))
                 //.foregroundColor(Color(UIColor.SCREEN_BG.teacher))
-                .foregroundColor(avatar.type == "PARENT" ? Color.red : Color.gray)
-                .foregroundColor(avatar.type == "CHILD" ? Color.blue : Color.gray)
-                .foregroundColor(avatar.type == "TEACHER" ? Color.yellow : Color.gray)
+                .foregroundColor(avatar.type == "parent" ? Color.red : Color.gray)
+                .foregroundColor(avatar.type == "child" ? Color.blue : Color.gray)
+                .foregroundColor(avatar.type == "teacher" ? Color.yellow : Color.gray)
             .foregroundColor(setAvatarTextColor(selectedAvatar: selectedAvatar))
 //                .foregroundColor(Color(red: 0.996, green: 0.878, blue: 0.635))
                 .padding(.top, -5.0)
@@ -46,40 +47,50 @@ struct AvatarCell: View {
         }
     }
     
+    enum AvatarType {
+        case none, parent, child, teacher
+    }
+    
     func setAvatarTextColor(selectedAvatar: String) -> Color {
-        if selectedAvatar == "TEACHER" {
+        if selectedAvatar == "teacher" {
             return Color(UIColor.SCREEN_BG.child)
-        } else if selectedAvatar == "CHILD" {
+        } else if selectedAvatar == "child" {
             return Color(UIColor.SCREEN_BG.parent)
-        } else if selectedAvatar == "PARENT" {
+        } else if selectedAvatar == "parent" {
             return Color(UIColor.SCREEN_BG.child)
         }
         return Color(UIColor.SCREEN_BG.teacher)
     }
     
     func setAvatarHighlight(selectedAvatar: String) -> some View {
-        if selectedAvatar == "TEACHER" {
+        if selectedAvatar != "teacher" {
             return RoundedRectangle(cornerRadius: 50)
                 .stroke(Color.white, lineWidth: 0)
-        } else if selectedAvatar == "CHILD" {
-            return RoundedRectangle(cornerRadius: 50)
-            .stroke(Color.white, lineWidth: 1)
-        } else if selectedAvatar == "PARENT" {
+        } else if selectedAvatar != "child" {
             return RoundedRectangle(cornerRadius: 50)
             .stroke(Color.white, lineWidth: 0)
+        } else if selectedAvatar != "parent" {
+            return RoundedRectangle(cornerRadius: 50)
+            .stroke(Color.white, lineWidth: 0)
+        } else if selectedAvatar == "none" {
+            return RoundedRectangle(cornerRadius: 50)
+            .stroke(Color.white, lineWidth: 2)
         }
         return RoundedRectangle(cornerRadius: 50)
-        .stroke(Color.white, lineWidth: 0)
+        .stroke(Color.white, lineWidth: 2)
     }
     
     func setAvatarOpacity(selectedAvatar: String) -> Double {
-        if selectedAvatar != "TEACHER" {
+        if selectedAvatar == "none" && selectedAvatar != "teacher" && selectedAvatar != "child" && selectedAvatar != "parent" {
+            return 1.0
+        } else if selectedAvatar != "none" && selectedAvatar != "teacher" {
             return 0.5
-        } else if selectedAvatar != "CHILD" {
+        } else if selectedAvatar != "none" && selectedAvatar != "child" {
             return 0.5
-        } else if selectedAvatar != "PARENT" {
+        } else if selectedAvatar != "none" && selectedAvatar != "parent" {
             return 0.5
         }
+  
         return 1.0
     }
     
