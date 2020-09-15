@@ -9,8 +9,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var keyboardResonder = KeyboardResponder()
+    
     var body: some View {
         SignupScreen()
+    .offset(y: -keyboardResonder.currentHeight*0.9)
     }
 }
 

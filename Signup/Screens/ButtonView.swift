@@ -9,19 +9,22 @@
 import SwiftUI
 
 struct ButtonView: View {
+     @State var allFieldsValid = false
+    @Binding var selectedAvatar: String
+    
     var body: some View {
         Button(action: {
-            // add action
+            
         }) {
             Text("SIGNUP")
                 .font(.headline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
-        }
+            }.disabled(!allFieldsValid)
         .padding(.all, 6.0)
         .frame(height: 50)
         .frame(maxWidth: .infinity)
-        .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
+            .background(!allFieldsValid && selectedAvatar == "none" ? LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing) : LinearGradient(gradient: Gradient(colors: [Color.gray, Color.black]), startPoint: .leading, endPoint: .trailing))
         .cornerRadius(30)
         .padding(.top, 45.0)
         .padding(.horizontal, 40)

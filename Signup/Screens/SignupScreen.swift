@@ -54,7 +54,7 @@ struct SignupScreen: View {
                 
                 FormView()
                 
-                ButtonView()
+                ButtonView(selectedAvatar: $selectedAvatar)
                 
                 HStack {
                     Text("Already have an account.")
