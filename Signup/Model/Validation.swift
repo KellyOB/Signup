@@ -10,7 +10,14 @@ import Foundation
 
 class Validation {
 
+    var profile = Profile()
     
+    func isPasswordValid() -> Bool {
+        if profile.password.count < 6 {
+            return false
+        }
+        return true
+    }
     
 //    func textFieldValidatorEmail(_ string: String) -> Bool {
 //        if string.count > 100 {

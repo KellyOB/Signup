@@ -20,6 +20,8 @@ struct Avatar: Identifiable {
             Avatar(id: 3, image: "teacher", type: "teacher")
         ]
     }
+    
+    
 }
 
 //enum AvatarState: String {

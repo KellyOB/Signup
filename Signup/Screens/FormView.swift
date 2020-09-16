@@ -10,35 +10,8 @@ import SwiftUI
 
 struct FormView: View {
     
-//    var validation = Validation()
     @State var profile = Profile()
-    
-    // EMAIL VALIDATION
-    var isEmailValid: Bool {
-        if profile.email.count < 5 {
-            return false
-        }
-        let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailFormat)
-        return emailPredicate.evaluate(with: profile.email)
-    }
-    
-    // PASSWORD VALIDATION
-    var isPasswordValid: Bool {
-        if profile.password.count < 6 {
-            return false
-        }
-        return true
-    }
-    
-    // CONFIRM PASSWORD VALIDATION
-    var isConfirmPasswordValid: Bool {
-        if profile.password != profile.confirmPassword {
-            return false
-        }
-        return true
-    }
-    
+     
     var body: some View {
         VStack(spacing: 25.0) {
             
@@ -63,7 +36,7 @@ struct FormView: View {
                 CustomTextField(placeholder: Text("Email").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.email)
 
                     if !profile.email.isEmpty {
-                        if !isEmailValid {
+                        if !profile.isEmailValid {
                             Text("Invalid email")
                             .foregroundColor(Color.red)
                             .padding(.trailing, 10)
@@ -71,7 +44,7 @@ struct FormView: View {
                     }
             }
             .background(Capsule().fill(Color(UIColor.FORM_COLOR.start)))
-            .overlay(self.isEmailValid || profile.email.isEmpty ? RoundedRectangle(cornerRadius: 30)
+            .overlay(profile.isEmailValid || profile.email.isEmpty ? RoundedRectangle(cornerRadius: 30)
                 .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
                 .stroke(Color.red, lineWidth: 1))
       
@@ -82,10 +55,10 @@ struct FormView: View {
                     .padding()
                     .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
                 
-                CustomTextField(placeholder: Text("Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.password)
+                CustomSecureTextField(placeholder: Text("Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.password)
                 
                 if !profile.password.isEmpty {
-                    if !isPasswordValid {
+                    if !profile.isPasswordValid {
                         Text("Min. 6 characters")
                         .foregroundColor(Color.red)
                         .padding(.trailing, 10)
@@ -94,7 +67,7 @@ struct FormView: View {
             
             }
             .background(Capsule().fill(Color(red: 0.161, green: 0.184, blue: 0.278)))
-            .overlay(self.isPasswordValid || profile.password.isEmpty ? RoundedRectangle(cornerRadius: 30)
+            .overlay(profile.isPasswordValid || profile.password.isEmpty ? RoundedRectangle(cornerRadius: 30)
                 .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
                 .stroke(Color.red, lineWidth: 1))
             
@@ -105,10 +78,10 @@ struct FormView: View {
                     .padding()
                     .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
                 
-                CustomTextField(placeholder: Text("Confirm Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.confirmPassword)
+                CustomSecureTextField(placeholder: Text("Confirm Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.confirmPassword)
                 
                 if !profile.password.isEmpty {
-                    if !isConfirmPasswordValid {
+                    if !profile.isConfirmPasswordValid {
                         Text("Does not match")
                         .foregroundColor(Color.red)
                         .padding(.trailing, 10)
@@ -117,7 +90,7 @@ struct FormView: View {
                 //.disabled(!isPasswordValid || profile.password.isEmpty)
             }
             .background(Capsule().fill(Color(red: 0.161, green: 0.184, blue: 0.278)))
-            .overlay(self.isConfirmPasswordValid || profile.confirmPassword.isEmpty ? RoundedRectangle(cornerRadius: 30)
+            .overlay(profile.isConfirmPasswordValid || profile.confirmPassword.isEmpty ? RoundedRectangle(cornerRadius: 30)
                 .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
                     .stroke(Color.red, lineWidth: 1))
         }
@@ -126,6 +99,7 @@ struct FormView: View {
         .padding(.horizontal, 40)
         .font(.custom("Avenir", size: 16))
         .foregroundColor(.white)
+        
     }
 }
 
@@ -140,6 +114,21 @@ struct CustomTextField: View {
         ZStack(alignment: .leading) {
             if text.isEmpty { placeholder }
             TextField("", text: $text, onEditingChanged: editingChanged, onCommit: commit)
+            .autocapitalization(.none)
+        }
+    }
+}
+// SECURE TEXT CUSTOM TEXTFIELD FOR PASSWORDS
+struct CustomSecureTextField: View {
+    var placeholder: Text
+    @Binding var text: String
+    var commit: ()->() = { }
+    
+    var body: some View {
+        ZStack(alignment: .leading) {
+            if text.isEmpty { placeholder }
+           SecureField("", text: $text, onCommit: commit)
+            .autocapitalization(.none)
         }
     }
 }
