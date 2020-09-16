@@ -12,9 +12,6 @@ struct Avatar: Identifiable {
     var id: Int
     var image: String
     var type: String
-   // var textColor: String
-    //var backGroundColor: String
-    
     
     static func loadAvatars() -> [Avatar] {
         return [
@@ -24,8 +21,6 @@ struct Avatar: Identifiable {
         ]
     }
 }
-
-
 
 //enum AvatarState: String {
 //    case parent = "parent"

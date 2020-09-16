@@ -17,7 +17,6 @@
 		BE6DA4632509E00A00617654 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4622509E00A00617654 /* AvatarView.swift */; };
 		BE6DA4652509E48B00617654 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4642509E48A00617654 /* Avatar.swift */; };
 		BE6DA4672509ED5700617654 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6DA4662509ED5700617654 /* FormView.swift */; };
-		BE96448C250B4AFF0016D98F /* AvatarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE96448B250B4AFF0016D98F /* AvatarCell.swift */; };
 		BE96448E250BE4DC0016D98F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE96448D250BE4DC0016D98F /* Constants.swift */; };
 		BE964490250BF7B40016D98F /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE96448F250BF7B40016D98F /* ButtonView.swift */; };
 		BEB09964250FD73D00F60473 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB09963250FD73D00F60473 /* KeyboardResponder.swift */; };
@@ -38,7 +37,6 @@
 		BE6DA4622509E00A00617654 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		BE6DA4642509E48A00617654 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		BE6DA4662509ED5700617654 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
-		BE96448B250B4AFF0016D98F /* AvatarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCell.swift; sourceTree = "<group>"; };
 		BE96448D250BE4DC0016D98F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BE96448F250BF7B40016D98F /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		BEB09963250FD73D00F60473 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 				BE5F2840250871A80059099A /* ContentView.swift */,
 				BE5F2850250872250059099A /* SignupScreen.swift */,
 				BE6DA4622509E00A00617654 /* AvatarView.swift */,
-				BE96448B250B4AFF0016D98F /* AvatarCell.swift */,
 				BE6DA4662509ED5700617654 /* FormView.swift */,
 				BE96448F250BF7B40016D98F /* ButtonView.swift */,
 			);
@@ -148,7 +145,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1170;
 				ORGANIZATIONNAME = "Kismet Development";
 				TargetAttributes = {
 					BE5F2838250871A80059099A = {
@@ -193,7 +190,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE5F283D250871A80059099A /* AppDelegate.swift in Sources */,
-				BE96448C250B4AFF0016D98F /* AvatarCell.swift in Sources */,
 				BEF88EDF2508777B007C34C4 /* Profile.swift in Sources */,
 				BE6DA4652509E48B00617654 /* Avatar.swift in Sources */,
 				BEB09966250FEACA00F60473 /* Validation.swift in Sources */,
@@ -272,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -326,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -340,17 +336,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Signup/Preview Content\"";
 				DEVELOPMENT_TEAM = B5D85LZH9D;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Signup/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kismetdevelopment.Signup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -360,17 +359,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Signup/Preview Content\"";
 				DEVELOPMENT_TEAM = B5D85LZH9D;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Signup/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kismetdevelopment.Signup;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

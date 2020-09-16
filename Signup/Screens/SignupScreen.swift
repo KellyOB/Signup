@@ -8,20 +8,12 @@
 
 import SwiftUI
 
-struct SignupTextField: TextFieldStyle {
-    public func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .font(.custom("Avenir", size: 18))
-            .foregroundColor(.white)
-    }
-}
-
 struct SignupScreen: View {
     
     @State private var profile = Profile()
-    @State var selectedAvatar = "none"
+    @State var selectedAvatar: String = "none"
     
-    let avatars = Avatar.loadAvatars()
+    let avatars: [Avatar] = Avatar.loadAvatars()
     
 //    enum UserType {
 //        case parent, child, teacher
