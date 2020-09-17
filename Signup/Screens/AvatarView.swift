@@ -23,7 +23,8 @@ struct AvatarView: View {
                 
                 Text("PARENT")
                     .modifier(AvatarTextStyle())
-                    .foregroundColor(self.selectedAvatar != "parent" || self.selectedAvatar == "none" ? Color(red: 0.996, green: 0.878, blue: 0.635) : Color.green)
+                    .foregroundColor(Color(UIColor.SECONDARY.parent))
+                    .opacity(self.selectedAvatar == "parent" || self.selectedAvatar == "none" ? 1.0 : 0.5)
             }
 
             VStack {
@@ -35,7 +36,8 @@ struct AvatarView: View {
 
                 Text("CHILD")
                     .modifier(AvatarTextStyle())
-                    .foregroundColor(self.selectedAvatar != "child" || self.selectedAvatar == "none" ? Color(red: 0.937, green: 0.6, blue: 0.212) : Color.red)
+                    .foregroundColor(self.selectedAvatar != "child" || self.selectedAvatar == "none" ? Color(UIColor.PRIMARY.child) : Color(UIColor.SECONDARY.child))
+                    .opacity(self.selectedAvatar == "child" || self.selectedAvatar == "none" ? 1.0 : 0.5)
             }
 
             VStack {
@@ -47,7 +49,8 @@ struct AvatarView: View {
 
                 Text("TEACHER")
                     .modifier(AvatarTextStyle())
-                    .foregroundColor(self.selectedAvatar != "teacher" || self.selectedAvatar == "none" ? Color(red: 0.753, green: 0.898, blue: 0.894) : Color.red)
+                    .foregroundColor(Color(UIColor.SECONDARY.teacher))
+                    .opacity(self.selectedAvatar == "teacher" || self.selectedAvatar == "none" ? 1.0 : 0.5)
             }
         }
     }

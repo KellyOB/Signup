@@ -9,8 +9,18 @@
 import SwiftUI
 
 struct ButtonView: View {
-     @State var allFieldsValid = false
+    var profile: Profile
+    
+    @State var allFieldsValid = false
     @Binding var selectedAvatar: String
+        
+    var isSignupEnabled: Bool  {
+        if !profile.username.isEmpty && profile.isEmailValid && profile.isPasswordValid && profile.isConfirmPasswordValid {
+            return true
+        } else {
+            return false
+        }
+    }
     
     var body: some View {
         Button(action: {
@@ -24,15 +34,17 @@ struct ButtonView: View {
         .padding(.all, 6.0)
         .frame(height: 50)
         .frame(maxWidth: .infinity)
-            .background(!allFieldsValid && selectedAvatar == "none" ? LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing) : LinearGradient(gradient: Gradient(colors: [Color.gray, Color.black]), startPoint: .leading, endPoint: .trailing))
+        .background(isSignupEnabled || selectedAvatar == "none" ? LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing) : LinearGradient(gradient: Gradient(colors: [Color.gray, Color.black]), startPoint: .leading, endPoint: .trailing))
         .cornerRadius(30)
         .padding(.top, 45.0)
         .padding(.horizontal, 40)
+        .disabled(!isSignupEnabled)
     }
+
 }
 
 //struct ButtonView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ButtonView(selectedAvatar: selecte)
+//        ButtonView()
 //    }
 //}

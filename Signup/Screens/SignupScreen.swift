@@ -31,48 +31,57 @@ struct SignupScreen: View {
                 Text("Sign up")
                     .fontWeight(.light)
                     .font(.custom("Avenir", size: 30))
-                    .foregroundColor(Color.white)
+                    .foregroundColor(selectedAvatar == "teacher" ? Color.black : Color.white)
                     .multilineTextAlignment(.center)
                     .padding(.top, 40.0)
                 
                 Text("WHO YOU ARE?")
                     .fontWeight(.black)
                     .font(.custom("Avenir", size: 15))
-                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
+                    .foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar))
                     .padding(.top, 35.0)
                     .padding(.bottom, 5.0)
                 
                 AvatarView(selectedAvatar: $selectedAvatar)
                 
-                FormView()
+                FormView(selectedAvatar: $selectedAvatar)
                 
-                ButtonView(selectedAvatar: $selectedAvatar)
+                ButtonView(profile: profile, selectedAvatar: $selectedAvatar)
                 
                 HStack {
                     Text("Already have an account.")
                         .italic()
-                        .foregroundColor(Color.white)
+                        .foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar))
                     Text("Login here")
                         .italic()
-                        .foregroundColor(Color.orange)
+                        .foregroundColor(selectedAvatar == "child" ? Color.white : Color.orange)
                 }
                 .font(.custom("Avenir", size: 15))
                 .padding(.top, 30)
             }
-        }.background(setBGColor(selectedAvatar: selectedAvatar).edgesIgnoringSafeArea(.all))
+        }.background(setPrimaryColor(selectedAvatar: selectedAvatar).edgesIgnoringSafeArea(.all))
     }
     
-    func setBGColor(selectedAvatar: String) -> Color {
-        if selectedAvatar == "teacher" {
-            return Color.red
-            //return Color(UIColor.SCREEN_BG.teacher)
+    func setPrimaryColor(selectedAvatar: String) -> Color {
+        if selectedAvatar == "parent" {
+            return Color(UIColor.PRIMARY.parent)
         } else if selectedAvatar == "child" {
-            return Color(UIColor.SCREEN_BG.child)
-        } else if selectedAvatar == "parent" {
-            //return Color.green
-            return Color(UIColor.SCREEN_BG.parent)
+            return Color(UIColor.PRIMARY.child)
+        } else if selectedAvatar == "teacher" {
+            return Color(UIColor.PRIMARY.teacher)
         }
-        return Color(UIColor.SCREEN_BG.start)
+        return Color(UIColor.PRIMARY.start)
+    }
+    
+    func setSecondayColor(selectedAvatar: String) -> Color {
+        if selectedAvatar == "parent" {
+            return Color(UIColor.SECONDARY.parent)
+        } else if selectedAvatar == "child" {
+            return Color(UIColor.SECONDARY.child)
+        } else if selectedAvatar == "teacher" {
+            return Color(UIColor.SECONDARY.teacher)
+        }
+        return Color(UIColor.SECONDARY.start)
     }
     
 //    func changeUsercolors(user: Avatar) -> Color {

@@ -13,8 +13,7 @@ struct Profile {
     var email: String = ""
     var password: String = ""
     var confirmPassword: String = ""
-    
-    
+        
     // EMAIL VALIDATION
     var isEmailValid: Bool {
         if email.count < 5 {

@@ -14,7 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         SignupScreen()
-    .offset(y: -keyboardResonder.currentHeight*0.9)
+        .offset(y: -keyboardResonder.currentHeight*0.9)
     }
 }
 

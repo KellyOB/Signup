@@ -11,7 +11,14 @@ import SwiftUI
 struct FormView: View {
     
     @State var profile = Profile()
-     
+    @Binding var selectedAvatar: String
+    
+    var userSelectedAvatar = String() {
+        didSet {
+            userSelectedAvatar = selectedAvatar
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 25.0) {
             
@@ -19,21 +26,21 @@ struct FormView: View {
             HStack {
                 Image(systemName: "person")
                     .padding()
-                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
+                    .foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar))
                 
-                CustomTextField(placeholder: Text("Username").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.username)
+                CustomTextField(placeholder: Text("Username").foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar)), text: $profile.username)
             }
-            .background(Capsule().fill(Color(UIColor.FORM_COLOR.start)))
+            .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1))
+                .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1))
             
             // EMAIL
             HStack {
                 Image(systemName: "envelope")
                     .padding()
-                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
+                    .foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar))
                 
-                CustomTextField(placeholder: Text("Email").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.email)
+                CustomTextField(placeholder: Text("Email").foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar)), text: $profile.email)
 
                     if !profile.email.isEmpty {
                         if !profile.isEmailValid {
@@ -43,9 +50,11 @@ struct FormView: View {
                         }
                     }
             }
-            .background(Capsule().fill(Color(UIColor.FORM_COLOR.start)))
+             //.background(setBGColor(selectedAvatar: selectedAvatar).edgesIgnoringSafeArea(.all))
+                
+            .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(profile.isEmailValid || profile.email.isEmpty ? RoundedRectangle(cornerRadius: 30)
-                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
+                .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
                 .stroke(Color.red, lineWidth: 1))
       
 
@@ -53,9 +62,9 @@ struct FormView: View {
             HStack {
                 Image(systemName: "lock")
                     .padding()
-                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
+                    .foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar))
                 
-                CustomSecureTextField(placeholder: Text("Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.password)
+                CustomSecureTextField(placeholder: Text("Password").foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar)), text: $profile.password)
                 
                 if !profile.password.isEmpty {
                     if !profile.isPasswordValid {
@@ -66,9 +75,9 @@ struct FormView: View {
                 }
             
             }
-            .background(Capsule().fill(Color(red: 0.161, green: 0.184, blue: 0.278)))
+            .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(profile.isPasswordValid || profile.password.isEmpty ? RoundedRectangle(cornerRadius: 30)
-                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
+                .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
                 .stroke(Color.red, lineWidth: 1))
             
                         
@@ -76,9 +85,9 @@ struct FormView: View {
             HStack {
                 Image(systemName: "lock")
                     .padding()
-                    .foregroundColor(Color(UIColor.FORM_COLOR.formOutline))
+                    .foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar))
                 
-                CustomSecureTextField(placeholder: Text("Confirm Password").foregroundColor(Color(UIColor.FORM_COLOR.formOutline)), text: $profile.confirmPassword)
+                CustomSecureTextField(placeholder: Text("Confirm Password").foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar)), text: $profile.confirmPassword)
                 
                 if !profile.password.isEmpty {
                     if !profile.isConfirmPasswordValid {
@@ -89,17 +98,39 @@ struct FormView: View {
                 } 
                 //.disabled(!isPasswordValid || profile.password.isEmpty)
             }
-            .background(Capsule().fill(Color(red: 0.161, green: 0.184, blue: 0.278)))
+            .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(profile.isConfirmPasswordValid || profile.confirmPassword.isEmpty ? RoundedRectangle(cornerRadius: 30)
-                .stroke(Color(UIColor.FORM_COLOR.formOutline), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
-                    .stroke(Color.red, lineWidth: 1))
+                .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
+                .stroke(Color.red, lineWidth: 1))
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 15.0)
         .padding(.horizontal, 40)
         .font(.custom("Avenir", size: 16))
-        .foregroundColor(.white)
+        .foregroundColor(selectedAvatar == "teacher" ? Color.black : Color.white)
         
+    }
+    
+    func setPrimaryColor(selectedAvatar: String) -> Color {
+        if selectedAvatar == "parent" {
+            return Color(UIColor.PRIMARY.parent)
+        } else if selectedAvatar == "child" {
+            return Color(UIColor.PRIMARY.child)
+        } else if selectedAvatar == "teacher" {
+            return Color(UIColor.PRIMARY.teacher)
+        }
+        return Color(UIColor.PRIMARY.start)
+    }
+    
+    func setSecondayColor(selectedAvatar: String) -> Color {
+        if selectedAvatar == "parent" {
+            return Color(UIColor.SECONDARY.parent)
+        } else if selectedAvatar == "child" {
+            return Color(UIColor.SECONDARY.child)
+        } else if selectedAvatar == "teacher" {
+            return Color(UIColor.SECONDARY.teacher)
+        }
+        return Color(UIColor.SECONDARY.start)
     }
 }
 
@@ -150,8 +181,9 @@ extension HStack {
     }
 }
 
-struct FormView_Previews: PreviewProvider {
-    static var previews: some View {
-        FormView()
-    }
-}
+//struct FormView_Previews: PreviewProvider {
+//    @Binding static var selectedAvatar: Avatar
+//    static var previews: some View {
+//        FormView(selectedAvatar: $selectedAvatar)
+//    }
+//}
