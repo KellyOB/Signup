@@ -32,7 +32,7 @@ struct FormView: View {
             }
             .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(RoundedRectangle(cornerRadius: 30, style: .continuous)
-                .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1))
+            .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1))
             
             // EMAIL
             HStack {
@@ -50,8 +50,6 @@ struct FormView: View {
                         }
                     }
             }
-             //.background(setBGColor(selectedAvatar: selectedAvatar).edgesIgnoringSafeArea(.all))
-                
             .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(profile.isEmailValid || profile.email.isEmpty ? RoundedRectangle(cornerRadius: 30)
                 .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
@@ -88,15 +86,13 @@ struct FormView: View {
                     .foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar))
                 
                 CustomSecureTextField(placeholder: Text("Confirm Password").foregroundColor(setSecondayColor(selectedAvatar: selectedAvatar)), text: $profile.confirmPassword)
+                    .disabled(!profile.isPasswordValid || profile.password.isEmpty)
                 
-                if !profile.password.isEmpty {
                     if !profile.isConfirmPasswordValid {
                         Text("Does not match")
                         .foregroundColor(Color.red)
                         .padding(.trailing, 10)
                     }
-                } 
-                //.disabled(!isPasswordValid || profile.password.isEmpty)
             }
             .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(profile.isConfirmPasswordValid || profile.confirmPassword.isEmpty ? RoundedRectangle(cornerRadius: 30)
