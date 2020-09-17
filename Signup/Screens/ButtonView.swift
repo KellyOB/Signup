@@ -11,31 +11,37 @@ import SwiftUI
 struct ButtonView: View {
     @State var profile = Profile()
     @Binding var selectedAvatar: String
-    @State private var buttonDisabled = true
-//    var isSignupEnabled: Bool  {
-//        if !profile.username.isEmpty && profile.isEmailValid && profile.isPasswordValid && profile.isConfirmPasswordValid {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
     
-//    var buttonDisabled = Bool() {
-//        didSet {
-//            buttonDisabled = isSignupEnabled
-//        }
-//    }
+   //@State private var password = ""
+   // @State private var confirmedPassword = ""
+    //@State private var buttonDisabled = true
+    
+    
+    var isSignupEnabled: Bool  {
+        if !profile.username.isEmpty && profile.isEmailValid && profile.isPasswordValid && profile.isConfirmPasswordValid || selectedAvatar == "none" {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    var buttonEnabled = Bool() {
+        didSet {
+            buttonEnabled = isSignupEnabled
+        }
+    }
     
     var body: some View {
         Button(action: {
-            self.buttonDisabled = false
+            //buttonDisabled = false
         }) {
             Text("SIGNUP")
                 .font(.headline)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
         }
-            
+
+        .disabled(!buttonEnabled)
         .padding(.all, 6.0)
         .frame(height: 50)
         .frame(maxWidth: .infinity)
@@ -44,14 +50,36 @@ struct ButtonView: View {
         .cornerRadius(30)
         .padding(.top, 45.0)
         .padding(.horizontal, 40)
-        //.disabled(buttonDisabled)
     }
     
     func styleButton() -> Color {
-        if !profile.username.isEmpty && profile.isEmailValid && profile.isPasswordValid && profile.isConfirmPasswordValid || selectedAvatar == "none" {
+        if buttonEnabled {
             return Color.green
         }
-        return Color.blue
+        return Color.red
+    }
+    
+    private func isInformationValid() -> Bool {
+        if selectedAvatar == "none" {
+            return false
+        }
+        
+        if !profile.username.isEmpty {
+            return false
+        }
+         
+        if profile.isEmailValid {
+            return false
+        }
+            
+        if profile.isPasswordValid {
+            return false
+        }
+        
+        if profile.isConfirmPasswordValid {
+                return false
+        }
+        return true
     }
     
 }

@@ -98,6 +98,47 @@ struct FormView: View {
             .overlay(profile.isConfirmPasswordValid || profile.confirmPassword.isEmpty ? RoundedRectangle(cornerRadius: 30)
                 .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
                 .stroke(Color.red, lineWidth: 1))
+            
+            // BUTTON
+            if self.isUserInformationValid() {
+                
+                Button(action: {
+                    print("is enabled")
+                }, label: {
+                    Text("SIGN IN")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                })
+        
+                .disabled(false)
+                .padding(.all, 6.0)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
+                .cornerRadius(30)
+                .padding(.top, 45.0)
+                .padding(.horizontal, 40)
+                
+            } else {
+                Button(action: {
+                    print("should not print")
+                }, label: {
+                    Text("SIGN IN")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .fontWeight(.bold)
+                })
+                .disabled(true)
+                .padding(.all, 6.0)
+                .frame(height: 50)
+                .frame(maxWidth: .infinity)
+                .background(LinearGradient(gradient: Gradient(colors: [Color.gray, Color.black]), startPoint: .leading, endPoint:.trailing))
+                .cornerRadius(30)
+                .padding(.top, 45.0)
+                .padding(.horizontal, 40)
+                
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.top, 15.0)
@@ -105,6 +146,30 @@ struct FormView: View {
         .font(.custom("Avenir", size: 16))
         .foregroundColor(selectedAvatar == "teacher" ? Color.black : Color.white)
         
+    }
+    
+    private func isUserInformationValid() -> Bool {
+        
+        if selectedAvatar == "none" {
+            return true
+        }
+        
+        if profile.username.isEmpty {
+            return false
+        }
+        
+        if !profile.isEmailValid {
+            return false
+        }
+        
+        if !profile.isPasswordValid {
+            return false
+        }
+        
+        if !profile.isConfirmPasswordValid {
+            return false
+        }
+        return true
     }
     
     func setPrimaryColor(selectedAvatar: String) -> Color {
@@ -162,10 +227,17 @@ struct CustomSecureTextField: View {
 
 
 // TEXTFIELD COLOR
-extension TextField {
-    func textFieldModifier() -> some View {
+extension Button {
+    func buttonModifier() -> some View {
         self
-            .foregroundColor(.white)
+            .disabled(false)
+            .padding(.all, 6.0)
+            .frame(height: 50)
+            .frame(maxWidth: .infinity)
+            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
+            .cornerRadius(30)
+            .padding(.top, 45.0)
+            .padding(.horizontal, 40)
     }
 }
 
