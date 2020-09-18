@@ -16,11 +16,8 @@ class KeyboardResponder: ObservableObject {
     var _center: NotificationCenter
         init(center : NotificationCenter = .default) {
             _center = center
-            
             _center.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
             _center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-            
         }
     
     @objc func keyboardWillShow(notification: Notification) {

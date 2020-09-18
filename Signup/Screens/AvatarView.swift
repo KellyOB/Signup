@@ -11,58 +11,47 @@ import SwiftUI
 struct AvatarView: View {
     
     @Binding var selectedAvatar: String
-    
+
     var body: some View {
         HStack(spacing: 30.0) {
+            
+            // PARENT AVATAR
             VStack {
                 Image("parent")
                     .imageAvatarModifier()
                     .onTapGesture {
                         self.selectedAvatar = "parent"
-                    }.opacity(self.selectedAvatar == "parent" || self.selectedAvatar == "none" ? 1.0 : 0.5)
+                    }
                 
                 Text("PARENT")
-                    .modifier(AvatarTextStyle())
-                    .foregroundColor(Color(UIColor.SECONDARY.parent))
-                    .opacity(self.selectedAvatar == "parent" || self.selectedAvatar == "none" ? 1.0 : 0.5)
-            }
+                    .textAvatarModifier(color: Color(UIColor.SECONDARY.parent))
+            }.opacityModifier(selectedAvatar: selectedAvatar, avatar: "parent", start: "none")
 
+            // CHILD AVATAR
             VStack {
                 Image("child")
                     .imageAvatarModifier()
                     .onTapGesture {
                         self.selectedAvatar = "child"
-                    }.opacity(self.selectedAvatar == "child" || self.selectedAvatar == "none" ? 1.0 : 0.5)
+                    }
 
                 Text("CHILD")
-                    .modifier(AvatarTextStyle())
-                    .foregroundColor(self.selectedAvatar != "child" || self.selectedAvatar == "none" ? Color(UIColor.PRIMARY.child) : Color(UIColor.SECONDARY.child))
-                    .opacity(self.selectedAvatar == "child" || self.selectedAvatar == "none" ? 1.0 : 0.5)
-            }
+                    .textAvatarModifier(color: Color(UIColor.SECONDARY.child))
+            }.opacityModifier(selectedAvatar: selectedAvatar, avatar: "child", start: "none")
 
+            // TEACHER AVATAR
             VStack {
                 Image("teacher")
                     .imageAvatarModifier()
                     .onTapGesture {
                         self.selectedAvatar = "teacher"
-                    }.opacity(self.selectedAvatar == "teacher" || self.selectedAvatar == "none" ? 1.0 : 0.5)
+                    }
 
                 Text("TEACHER")
-                    .modifier(AvatarTextStyle())
-                    .foregroundColor(Color(UIColor.SECONDARY.teacher))
-                    .opacity(self.selectedAvatar == "teacher" || self.selectedAvatar == "none" ? 1.0 : 0.5)
-            }
+                    .textAvatarModifier(color: Color(UIColor.SECONDARY.teacher))
+                
+            }.opacityModifier(selectedAvatar: selectedAvatar, avatar: "teacher", start: "none")
         }
-    }
-}
-
-struct AvatarTextStyle: ViewModifier {
-     let font = Font.custom("Avenir", size: 13).weight(.bold)
-    
-     func body(content: Content) -> some View {
-        content
-            .font(font)
-            .padding(.top, -10.0)
     }
 }
 
@@ -75,8 +64,24 @@ extension Image {
     }
 }
 
-//struct AvatarScreen_Previews: PreviewProvider {
+extension Text {
+    func textAvatarModifier(color: Color) -> some View {
+        self
+            .font(Font.custom("Avenir", size: 13).weight(.bold))
+            .padding(.top, -10.0)
+            .foregroundColor(color)
+    }
+}
+
+extension VStack {
+    func opacityModifier(selectedAvatar: String, avatar: String, start: String) -> some View {
+        self
+         .opacity(selectedAvatar == avatar || selectedAvatar == start ? 1.0 : 0.5)
+    }
+}
+
+//struct AvatarView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        AvatarScreen()
+//        AvatarView()
 //    }
 //}

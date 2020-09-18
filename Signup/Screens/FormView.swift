@@ -12,13 +12,7 @@ struct FormView: View {
     
     @State var profile = Profile()
     @Binding var selectedAvatar: String
-    
-    var userSelectedAvatar = String() {
-        didSet {
-            userSelectedAvatar = selectedAvatar
-        }
-    }
-    
+      
     var body: some View {
         VStack(spacing: 25.0) {
             
@@ -32,7 +26,7 @@ struct FormView: View {
             }
             .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(RoundedRectangle(cornerRadius: 30, style: .continuous)
-            .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1))
+                .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1))
             
             // EMAIL
             HStack {
@@ -54,7 +48,6 @@ struct FormView: View {
             .overlay(profile.isEmailValid || profile.email.isEmpty ? RoundedRectangle(cornerRadius: 30)
                 .stroke(setSecondayColor(selectedAvatar: selectedAvatar), lineWidth: 1) : RoundedRectangle(cornerRadius: 30)
                 .stroke(Color.red, lineWidth: 1))
-      
 
             // PASSWORD
             HStack {
@@ -71,7 +64,6 @@ struct FormView: View {
                         .padding(.trailing, 10)
                     }
                 }
-            
             }
             .background(Capsule().fill(setPrimaryColor(selectedAvatar: selectedAvatar)))
             .overlay(profile.isPasswordValid || profile.password.isEmpty ? RoundedRectangle(cornerRadius: 30)
@@ -110,16 +102,7 @@ struct FormView: View {
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                 })
-        
-                .disabled(false)
-                .padding(.all, 6.0)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
-                .cornerRadius(30)
-                .padding(.top, 45.0)
-                .padding(.horizontal, 40)
-                
+                .buttonModifier(isDisabled: false, start: Color(UIColor.BUTTON_COLOR.startColor), end: Color(UIColor.BUTTON_COLOR.endColor))
             } else {
                 Button(action: {
                     print("should not print")
@@ -129,23 +112,13 @@ struct FormView: View {
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                 })
-                .disabled(true)
-                .padding(.all, 6.0)
-                .frame(height: 50)
-                .frame(maxWidth: .infinity)
-                .background(LinearGradient(gradient: Gradient(colors: [Color.gray, Color.black]), startPoint: .leading, endPoint:.trailing))
-                .cornerRadius(30)
-                .padding(.top, 45.0)
-                .padding(.horizontal, 40)
-                
+                .buttonModifier(isDisabled: true, start: Color.gray, end: Color.black)
             }
         }
-        .frame(maxWidth: .infinity)
         .padding(.top, 15.0)
         .padding(.horizontal, 40)
         .font(.custom("Avenir", size: 16))
-        .foregroundColor(selectedAvatar == "teacher" ? Color.black : Color.white)
-        
+        .foregroundColor(selectedAvatar == "teacher" ? Color.black : Color.white)        
     }
     
     private func isUserInformationValid() -> Bool {
@@ -210,6 +183,7 @@ struct CustomTextField: View {
         }
     }
 }
+
 // SECURE TEXT CUSTOM TEXTFIELD FOR PASSWORDS
 struct CustomSecureTextField: View {
     var placeholder: Text
@@ -225,27 +199,17 @@ struct CustomSecureTextField: View {
     }
 }
 
-
 // TEXTFIELD COLOR
 extension Button {
-    func buttonModifier() -> some View {
+    func buttonModifier(isDisabled: Bool, start: Color, end: Color) -> some View {
         self
-            .disabled(false)
+            .disabled(isDisabled)
             .padding(.all, 6.0)
             .frame(height: 50)
             .frame(maxWidth: .infinity)
-            .background(LinearGradient(gradient: Gradient(colors: [Color(UIColor.BUTTON_COLOR.startColor), Color(UIColor.BUTTON_COLOR.endColor)]), startPoint: .leading, endPoint: .trailing))
+            .background(LinearGradient(gradient: Gradient(colors: [start, end]), startPoint: .leading, endPoint: .trailing))
             .cornerRadius(30)
             .padding(.top, 45.0)
-            .padding(.horizontal, 40)
-    }
-}
-
-extension HStack {
-    func overlayModifier() -> some View {
-        self
-         .overlay(RoundedRectangle(cornerRadius: 30)
-         .stroke(Color.red, lineWidth: 1))
     }
 }
 

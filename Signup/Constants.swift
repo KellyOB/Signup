@@ -30,13 +30,3 @@ extension UIColor {
         static let teacher = UIColor(red: 1/255, green: 165/255, blue: 165/255, alpha: 1)
     }
 }
-
-        // PARENT
-       //.background(Color(red: 0.996, green: 0.878, blue: 0.635).edgesIgnoringSafeArea(.all))
-       
-       // CHILD
-       //.background(Color(red: 0.937, green: 0.6, blue: 0.212).edgesIgnoringSafeArea(.all))
-       
-       // TEACHER
-       //.background(Color(red: 0.753, green: 0.898, blue: 0.894).edgesIgnoringSafeArea(.all))
-       
