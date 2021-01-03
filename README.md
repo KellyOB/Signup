@@ -15,7 +15,8 @@ Build a signup screen to match example and only allow emails in valid format and
 
 # Screenshots
 
-<img src = "https://user-images.githubusercontent.com/32715761/99889350-14c95a00-2c09-11eb-9758-36121e3004b7.png" width="200" hspace="10" /> <img src = "https://user-images.githubusercontent.com/32715761/99889414-b3ee5180-2c09-11eb-9fdd-b0c0e056ea49.png" width="200" hspace="30" />
+<img src = "https://user-images.githubusercontent.com/32715761/103487882-6430a780-4dbd-11eb-915c-5078fe375a7e.png" width="200" hspace="10" /> <img src = "https://user-images.githubusercontent.com/32715761/103487889-698df200-4dbd-11eb-9b1a-6ce7c3002b99.png" width="200" hspace="30" />
+<img src = "https://user-images.githubusercontent.com/32715761/103487892-6bf04c00-4dbd-11eb-9e8c-e38eb6bd35ce.png" width="200" hspace="30" /> <img src = "https://user-images.githubusercontent.com/32715761/103487894-6e52a600-4dbd-11eb-9238-fc69008e08d0.png" width="200" hspace="30" />
 
 # Features
 * SwiftUI
